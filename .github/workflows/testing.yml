@@ -1,4 +1,4 @@
-name: Unit-Test
+name: Testing lorenzpy
 
 on:
   push:
@@ -23,9 +23,15 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           architecture: "x64"
+      - name: upgrade pip
+        run: python -m pip install --upgrade pip
       - name: confirm pip version
         run: pip --version
-      - name: installation
+      - name: installation of package in dev mode
         run: pip install .[dev]
-      - name: test
+      - name: checking with black
+        run: black --check .
+      - name: checking with mypy
+        run: mypy
+      - name: running pytest
         run: python -m pytest --cov
