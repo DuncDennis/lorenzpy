@@ -1,33 +1,21 @@
-[tool.poetry]
+[project]
 name = "lorenzpy"
-version = "0.1.0"
-description = ""
-license = "MIT"
-authors = ["DuncDennis <90915296+DuncDennis@users.noreply.github.com>"]
 readme = "README.md"
+version = "0.1.0"
+authors = [
+    { name = "Dennis Duncan", email = "DuncDennis@gmail.com" }
+]
+license = { file = "LICENSE.txt" }
+dependencies = [
+    "numpy"
+]
 
-[tool.poetry.dependencies]
-python = "^3.8"
-numpy = "^1.24.2"
-
-[tool.poetry.scripts]
-lorenzpy = "lorenzpy.main:print_hello"
-
-[tool.poetry.group.dev.dependencies]
-pytest = "^7.2.2"
-coverage = {extras = ["toml"], version = "^7.2.1"}
-pytest-cov = "^4.0.0"
-
-[tool.coverage.paths]
-source = ["src", "*/site-packages"]
-
-[tool.coverage.run]
-branch = true
-source = ["lorenzpy"]
-
-[tool.coverage.report]
-show_missing = true
+[project.optional-dependencies]
+dev = [
+    "pytest==7.2.0",
+    "pytest-cov==4.0",
+]
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
