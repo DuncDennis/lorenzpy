@@ -1,4 +1,4 @@
-name: Here1
+name: Unit-Test
 
 on:
   push:
@@ -14,8 +14,8 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        python-version: ["3.8", "3.9"]
-    name: Here Python ${{ matrix.python-version }}
+        python-version: ["3.8", "3.9", "3.10", "3.11"]
+    name: Python ${{ matrix.python-version }}
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
@@ -28,4 +28,5 @@ jobs:
       - name: installation
         run: pip install .[dev]
       - name: test
-        run: python -m pytest --cov
+        run: pytest tests.py --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
+#        run: python -m pytest --cov
