@@ -13,7 +13,9 @@ from typing import Callable
 import numpy as np
 
 
-def _runge_kutta(f: Callable[[np.ndarray], np.ndarray], dt: float, x: np.ndarray) -> np.ndarray:
+def _runge_kutta(
+    f: Callable[[np.ndarray], np.ndarray], dt: float, x: np.ndarray
+) -> np.ndarray:
     """Simulate one step for ODEs of the form dx/dt = f(x(t)) using Runge-Kutta.
 
     Args:
@@ -67,7 +69,9 @@ class _SimBase(ABC):
     def iterate(self, x: np.ndarray) -> np.ndarray:
         """The abstract iterate function."""
 
-    def simulate(self, time_steps: int, starting_point: np.ndarray | None = None) -> np.ndarray:
+    def simulate(
+        self, time_steps: int, starting_point: np.ndarray | None = None
+    ) -> np.ndarray:
         """Simulate the trajectory.
 
         Args:
@@ -130,7 +134,11 @@ class Lorenz63(_SimBaseRungeKutta):
     sys_dim = 3
 
     def __init__(
-        self, sigma: float | None = None, rho: float | None = None, beta: float | None = None, dt: float | None = None
+        self,
+        sigma: float | None = None,
+        rho: float | None = None,
+        beta: float | None = None,
+        dt: float | None = None,
     ) -> None:
         """Define the system parameters.
 
@@ -155,4 +163,10 @@ class Lorenz63(_SimBaseRungeKutta):
             : (dx/dt, dy/dt, dz/dt) corresponding to input x.
 
         """
-        return np.array([self.sigma * (x[1] - x[0]), x[0] * (self.rho - x[2]) - x[1], x[0] * x[1] - self.beta * x[2]])
+        return np.array(
+            [
+                self.sigma * (x[1] - x[0]),
+                x[0] * (self.rho - x[2]) - x[1],
+                x[0] * x[1] - self.beta * x[2],
+            ]
+        )
