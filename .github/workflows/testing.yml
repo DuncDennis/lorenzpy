@@ -32,8 +32,10 @@ jobs:
       - name: checking with black
         run: black --check .
       - name: checking with ruff
-        run: ruff .
+        run: ruff check --format=github .
       - name: checking with mypy
         run: mypy
       - name: running pytest
         run: python -m pytest --cov
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
