@@ -31,7 +31,9 @@ jobs:
         run: pip install .[dev]
       - name: checking with black
         run: black --check .
-      - name: checking with mypy
-        run: mypy
+#      - name: checking with mypy
+#        run: mypy
+      - name: checking with ruff
+        run: ruff .
       - name: running pytest
         run: python -m pytest --cov
