@@ -20,7 +20,7 @@ dev = [
 ]
 
 #[tool.pytest.ini_options]
-#addopts = "--cov=lorenzpy --junitxml=coverage.xml"
+#addopts = "--cov=lorenzpy"
 
 [tool.black]
 target-version = ['py38', 'py39', 'py310', 'py311']
