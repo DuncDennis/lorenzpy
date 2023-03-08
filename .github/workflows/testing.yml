@@ -14,7 +14,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        python-version: ["3.8", "3.9", "3.10"]
+        python-version: ["3.8", "3.9", "3.10", "3.11"]
     name: Python ${{ matrix.python-version }}
     steps:
       - uses: actions/checkout@v3
@@ -31,9 +31,9 @@ jobs:
         run: pip install .[dev]
       - name: checking with black
         run: black --check .
-#      - name: checking with mypy
-#        run: mypy
       - name: checking with ruff
         run: ruff .
+      - name: checking with mypy
+        run: mypy
       - name: running pytest
         run: python -m pytest --cov

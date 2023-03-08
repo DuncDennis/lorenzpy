@@ -2,7 +2,8 @@
 
 Every dynamical system is represented as a class.
 The general syntax for simulating the trajectory is:
-trajectory = SystemClass(parameters=<default>).simulate(time_steps, starting_point=<default>)
+trajectory = SystemClass(parameters=<default>).simulate(time_steps,
+starting_point=<default>)
 """
 
 from __future__ import annotations
@@ -38,7 +39,7 @@ def _runge_kutta(
 def _timestep_iterator(
     f: Callable[[np.ndarray], np.ndarray], time_steps: int, starting_point: np.ndarray
 ) -> np.ndarray:
-    """Iterate a function f: x(i+1) = f(x(i)) multiple times to obtain a full trajectory.
+    """Iterate a function f: x(i+1) = f(x(i)) multiple times to obtain a full traj.
 
     Args:
         f: The iterator function x(i+1) = f(x(i)).
@@ -76,8 +77,8 @@ class _SimBase(ABC):
 
         Args:
             time_steps: Number of time steps t to simulate.
-            starting_point: Starting point of the trajectory shape (sys_dim,). If None, take the
-                            default starting point.
+            starting_point: Starting point of the trajectory shape (sys_dim,).
+                            If None, take the default starting point.
 
         Returns:
             Trajectory of shape (t, sys_dim).
@@ -118,9 +119,9 @@ class _SimBaseRungeKutta(_SimBase):
 class Lorenz63(_SimBaseRungeKutta):
     """Simulate the 3-dimensional autonomous flow: Lorenz-63 attractor.
 
-    Literature values (Sprott, Julien Clinton, and Julien C. Sprott. Chaos and time-series
-    analysis. Vol. 69. Oxford: Oxford university press, 2003.) for default parameters and
-    starting_point:
+    Literature values (Sprott, Julien Clinton, and Julien C. Sprott. Chaos and
+    time-series analysis. Vol. 69. Oxford: Oxford university press, 2003.) for default
+    parameters and starting_point:
     - Lyapunov exponents: (0.9059, 0.0, -14.5723)
     - Kaplan-Yorke dimension: 2.06215
     - Correlation dimension: 2.068 +- 0.086

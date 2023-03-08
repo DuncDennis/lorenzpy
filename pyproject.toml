@@ -15,15 +15,29 @@ dev = [
     "pytest==7.2.0",
     "pytest-cov==4.0",
     "black==22.12.0",
-    "mypy==0.961",
+    "mypy==1.1.1",
     "ruff==0.0.254",
 ]
 
 [tool.black]
-target-version = ['py39']
+target-version = ['py38', 'py39', 'py310', 'py311']
+line-length = 88
 
 [tool.mypy]
 files = "src/lorenzpy/"
+
+[tool.ruff]
+line-length = 88
+select = [
+    "E",    # pycodestyle
+    "F",    # pyflakes
+    "D",    # pydocstyle
+    "I001", # isort
+]
+src = ["src", "tests"]
+
+[tool.ruff.pydocstyle]
+convention = "google"
 
 [build-system]
 requires = ["setuptools"]
