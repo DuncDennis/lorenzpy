@@ -19,6 +19,9 @@ dev = [
     "ruff==0.0.254",
 ]
 
+[tool.pytest.ini_options]
+addopts = "--cov=modern_python_package --junitxml=coverage.xml"
+
 [tool.black]
 target-version = ['py38', 'py39', 'py310', 'py311']
 line-length = 88

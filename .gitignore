@@ -3,3 +3,4 @@
 .coverage
 
 src/lorenzpy.egg-info
+/coverage.xml
