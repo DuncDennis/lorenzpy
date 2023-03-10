@@ -18,9 +18,9 @@ dev = [
     "mypy==1.1.1",
     "ruff==0.0.254",
 ]
-
-#[tool.pytest.ini_options]
-#addopts = "--cov=lorenzpy"
+plot = [
+    "plotly==5.13.1",
+]
 
 [tool.black]
 target-version = ['py38', 'py39', 'py310', 'py311']
@@ -28,6 +28,10 @@ line-length = 88
 
 [tool.mypy]
 files = "src/lorenzpy/"
+
+[[tool.mypy.overrides]]
+module = ['plotly.*']   # ignore missing imports from the plotly package.
+ignore_missing_imports = true
 
 [tool.ruff]
 line-length = 88
@@ -38,6 +42,10 @@ select = [
     "I001", # isort
 ]
 src = ["src", "tests"]
+
+# Ignore `F401` (unused-import) in all `__init__.py` files.
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["F401"]
 
 [tool.ruff.pydocstyle]
 convention = "google"
