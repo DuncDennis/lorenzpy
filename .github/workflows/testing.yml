@@ -1,5 +1,5 @@
 name: Testing lorenzpy
-run-name: ${{ github.actor }} testing lorenzpy
+#run-name: ${{ github.actor }} testing lorenzpy
 on:
   push:
     branches:
@@ -34,6 +34,6 @@ jobs:
       - name: checking with mypy
         run: mypy
       - name: running pytest
-        run: pytest
+        run: pytest --cov
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
