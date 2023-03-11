@@ -36,6 +36,6 @@ jobs:
       - name: checking with mypy
         run: mypy
       - name: running pytest
-        run: pytest
+        run: pytest tests/
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
