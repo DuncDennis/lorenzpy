@@ -22,6 +22,12 @@ plot = [
     "plotly==5.13.1",
 ]
 
+[tool.pytest.ini_options]
+addopts = "--cov-config=pyproject.toml --cov-report term-missing --cov=lorenzpy"
+
+[tool.coverage.run]
+omit = ["src/lorenzpy/plot/*"]
+
 [tool.black]
 target-version = ['py38', 'py39', 'py310', 'py311']
 line-length = 88
