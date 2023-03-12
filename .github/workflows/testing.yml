@@ -1,5 +1,4 @@
 name: Testing lorenzpy
-#run-name: ${{ github.actor }} testing lorenzpy
 on:
   push:
     branches:
@@ -13,11 +12,11 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        python-version: ["3.8", "3.9", "3.10", "3.11"]
+#        os: [ubuntu-latest, macos-latest, windows-latest]
+#        python-version: ["3.8", "3.9", "3.10", "3.11"]
 #        os: [windows-latest]
-#        os: [ubuntu-latest]
-#        python-version: ["3.9"]
+        os: [ubuntu-latest]
+        python-version: ["3.9"]
     name: Python ${{ matrix.python-version }} on ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
@@ -37,11 +36,8 @@ jobs:
       - name: checking with mypy
         run: mypy
       - name: running pytest
-        run: pytest --exitfirst --verbose --cov-config=pyproject.toml --cov-report term-missing --cov=lorenzpy
-#        run: pytest --cov-report term-missing --cov=src
-#        run: pytest --cov-report=xml
-#      - name: running pytest
-#        run: coverage run -m pytest
+        run: pytest
+#        run: pytest --exitfirst --verbose --cov-config=pyproject.toml --cov-report term-missing --cov=lorenzpy
       - name: show coverage
         run: coverage report
       - name: List files in the repository

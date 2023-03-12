@@ -25,8 +25,8 @@ plot = [
 
 #[tool.pytest.ini_options]
 #addopts = "--cov-config=pyproject.toml --cov-report term-missing --cov=src"
-#[tool.pytest.ini_options]
-#addopts = "--cov=src"
+[tool.pytest.ini_options]
+addopts = "--verbose --cov-config=pyproject.toml --cov-report term-missing --cov=lorenzpy"
 
 [tool.coverage.run]
 source = ["src"]
