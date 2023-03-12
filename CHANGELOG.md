@@ -48,6 +48,9 @@
    - Use the plugin [mkdocstrings](https://github.com/mkdocstrings/mkdocstrings) to
    automatically use the code-docstrings in the documentation.
 
+**Deployment on PyPI**:
+- Following the [PyPA tutorial](https://packaging.python.org/en/latest/guides/publishing-package-distribution-releases-using-github-actions-ci-cd-workflows/)
+
 **Resources**: 
 Taking inspiration from: 
  https://github.com/dkmiller/modern-python-package, and 

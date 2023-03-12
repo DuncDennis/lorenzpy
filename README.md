@@ -11,6 +11,9 @@ There is no release of the package yet and most of the functionalities are missi
 For now only the basic functionalities are implemented in order to build up the 
 developing workflow. 
 
+## Documentation: 
+The documentation can be found here: https://duncdennis.github.io/lorenzpy/
+
 ## Installation: 
 
 #### User installation: 
