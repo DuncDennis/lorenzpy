@@ -12,11 +12,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-#        os: [ubuntu-latest, macos-latest, windows-latest]
-#        python-version: ["3.8", "3.9", "3.10", "3.11"]
-#        os: [windows-latest]
-        os: [ubuntu-latest]
-        python-version: ["3.9"]
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python-version: ["3.8", "3.9", "3.10", "3.11"]
     name: Python ${{ matrix.python-version }} on ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
@@ -37,11 +34,5 @@ jobs:
         run: mypy
       - name: running pytest
         run: pytest
-#        run: pytest --exitfirst --verbose --cov-config=pyproject.toml --cov-report term-missing --cov=lorenzpy
-      - name: show coverage
-        run: coverage report
-      - name: List files in the repository
-        run: |
-         ls ${{ github.workspace }}
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
