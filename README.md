@@ -6,10 +6,10 @@
 [![license: MIT](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
 [![Python versions](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 
-
-## Under development: 
-Slowly adding tools, taking https://github.com/dkmiller/modern-python-package, and 
-https://github.com/denkiwakame/py-tiny-pkg as examples. 
+## 🚧 Under construction 🚧
+There is no release of the package yet and most of the functionalities are missing. 
+For now only the basic functionalities are implemented in order to build up the 
+developing workflow. 
 
 ## Installation: 
 
