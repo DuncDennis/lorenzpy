@@ -25,13 +25,13 @@ plot = [
 
 #[tool.pytest.ini_options]
 #addopts = "--cov-config=pyproject.toml --cov-report term-missing --cov=src"
-[tool.pytest.ini_options]
-addopts = "--cov=src"
+#[tool.pytest.ini_options]
+#addopts = "--cov=src"
 
 #
-#[tool.coverage.run]
+[tool.coverage.run]
+omit = ["src/lorenzpy/plot/*"]
 #source = ["src"]
-#omit = ["src/lorenzpy/plot/*"]
 
 [tool.black]
 target-version = ['py38', 'py39', 'py310', 'py311']
