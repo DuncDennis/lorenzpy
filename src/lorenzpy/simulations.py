@@ -194,20 +194,3 @@ class Lorenz63(_SimBaseRungeKutta):
                 x[0] * x[1] - self.beta * x[2],
             ]
         )
-
-
-def double_num(x: float) -> float:
-    """Double a number.
-
-    Examples:
-        >>> double_num(3)
-        6
-
-
-    Args:
-        x: Input number to be doubled.
-
-    Returns:
-        Double of x.
-    """
-    return 2 * x
