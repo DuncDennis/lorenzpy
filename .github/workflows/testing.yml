@@ -37,7 +37,8 @@ jobs:
       - name: checking with mypy
         run: mypy
       - name: running pytest
-        run: pytest --cov-report=xml
+        run: python -m pytest --cov
+#        run: pytest --cov-report=xml
 #      - name: running pytest
 #        run: coverage run -m pytest
       - name: show coverage
