@@ -29,7 +29,7 @@ plot = [
 addopts = "--verbose --cov-config=pyproject.toml --cov-report term-missing --cov=lorenzpy"
 
 [tool.coverage.run]
-source = ["src"]
+#source = ["src"]
 omit = ["*/plot/*"]
 
 [tool.black]
