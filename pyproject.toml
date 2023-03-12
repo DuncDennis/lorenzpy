@@ -13,7 +13,6 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     "pytest==7.2.0",
-#    "coverage[toml]==7.2.1",
     "pytest-cov==4.0",
     "black==22.12.0",
     "mypy==1.1.1",
@@ -23,13 +22,10 @@ plot = [
     "plotly==5.13.1",
 ]
 
-#[tool.pytest.ini_options]
-#addopts = "--cov-config=pyproject.toml --cov-report term-missing --cov=src"
 [tool.pytest.ini_options]
 addopts = "--verbose --cov-config=pyproject.toml --cov-report term-missing --cov=lorenzpy"
 
 [tool.coverage.run]
-#source = ["src"]
 omit = ["*/plot/*"]
 
 [tool.black]
