@@ -23,12 +23,12 @@ plot = [
     "plotly==5.13.1",
 ]
 
+[tool.pytest.ini_options]
+addopts = "--cov-config=pyproject.toml --cov-report term-missing --cov=src"
+
 [tool.coverage.run]
 source = ["src"]
 omit = ["src/lorenzpy/plot/*"]
-
-#[tool.pytest.ini_options]
-#addopts = "--cov-config=pyproject.toml --cov-report term-missing --cov=src"
 
 [tool.black]
 target-version = ['py38', 'py39', 'py310', 'py311']
