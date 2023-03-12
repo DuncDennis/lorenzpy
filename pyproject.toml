@@ -27,8 +27,8 @@ plot = [
 addopts = "--cov-config=pyproject.toml --cov-report term-missing --cov=src"
 
 [tool.coverage.run]
-source = ["src"]
-omit = ["src/lorenzpy/plot/*"]
+#source = ["src"]
+#omit = ["src/lorenzpy/plot/*"]
 
 [tool.black]
 target-version = ['py38', 'py39', 'py310', 'py311']
