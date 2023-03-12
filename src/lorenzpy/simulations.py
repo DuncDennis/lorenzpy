@@ -1,9 +1,32 @@
-"""Simulate various chaotic system to generate artificial data.
+"""Simulate various continuous and discrete chaotic dynamical system.
 
 Every dynamical system is represented as a class.
-The general syntax for simulating the trajectory is:
-trajectory = SystemClass(parameters=<default>).simulate(time_steps,
-starting_point=<default>)
+
+The available classes are:
+- Lorenz63
+
+The system's parameters are introduced in the class's constructor.
+
+For example when creating a system object of the Lorenz63, the Lorenz parameters,
+sigma, rho, beta, and the timestep dt are parsed as:
+
+sys_obj = Lorenz63(sigma=10, rho=10, beta=5, dt=1)
+
+Each sys_obj contains a "simulate" function.
+To simulate 1000 time-steps of the Lorenz63 system call:
+
+sys_obj.simulate(1000).
+
+The general syntax to create a trajectory of a System is given as:
+
+trajectory = <SystemClass>(<parameters>=<default>).
+simulate(time_steps, starting_point=<default>)
+
+Examples:
+    >>> import lorenzpy.simulations as sims
+    >>> data = sims.Lorenz63().simulate(1000)
+    >>> data.shape
+    (1000, 3)
 """
 
 from __future__ import annotations
@@ -171,3 +194,20 @@ class Lorenz63(_SimBaseRungeKutta):
                 x[0] * x[1] - self.beta * x[2],
             ]
         )
+
+
+def double_num(x: float) -> float:
+    """Double a number.
+
+    Examples:
+        >>> double_num(3)
+        6
+
+
+    Args:
+        x: Input number to be doubled.
+
+    Returns:
+        Double of x.
+    """
+    return 2 * x

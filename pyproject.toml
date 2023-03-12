@@ -17,6 +17,9 @@ dev = [
     "black==22.12.0",
     "mypy==1.1.1",
     "ruff==0.0.254",
+    "mkdocs",
+    "mkdocstrings[python]",
+    "mkdocs-material"
 ]
 plot = [
     "plotly==5.13.1",
