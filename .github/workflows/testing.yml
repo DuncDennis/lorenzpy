@@ -37,7 +37,7 @@ jobs:
       - name: checking with mypy
         run: mypy
       - name: running pytest
-        run: pytest --exitfirst --verbose --cov-config=pyproject.toml --cov-report term-missing --cov=src
+        run: pytest --exitfirst --verbose --cov-config=pyproject.toml --cov-report term-missing --cov=lorenzpy
 #        run: pytest --cov-report term-missing --cov=src
 #        run: pytest --cov-report=xml
 #      - name: running pytest
