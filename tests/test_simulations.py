@@ -5,7 +5,7 @@ import pytest
 from lorenzpy import simulations
 
 
-class TestSim(simulations._SimBase):
+class DemoSim(simulations._SimBase):
     """A simple simulation class subclassing simulations._SimBase."""
 
     sys_dim = 3
@@ -46,7 +46,7 @@ def test_simulate_trajectory_lorenz63_single_step():
 
 def test_simulation_with_wrong_dim_of_starting_point():
     """Testing that the ValueError is raised from wrong starting point in simulate."""
-    test_sim = TestSim()
+    test_sim = DemoSim()
     wrong_starting_point = np.array([1, 1])
 
     with pytest.raises(ValueError):
