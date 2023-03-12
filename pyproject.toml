@@ -30,8 +30,8 @@ plot = [
 
 #
 [tool.coverage.run]
+include = ["src"]
 omit = ["src/lorenzpy/plot/*"]
-#source = ["src"]
 
 [tool.black]
 target-version = ['py38', 'py39', 'py310', 'py311']
