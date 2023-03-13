@@ -1,8 +1,8 @@
 ### LorenzPy package:
 ::: lorenzpy
 
-### simulations module: 
+### simulations module:
 ::: lorenzpy.simulations
 
-### measures module: 
+### measures module:
 ::: lorenzpy.measures

@@ -7,23 +7,23 @@
 [![Python versions](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 
 ## 🚧 Under construction 🚧
-There is no release of the package yet and most of the functionalities are missing. 
-For now only the basic functionalities are implemented in order to build up the 
-developing workflow. 
+There is no release of the package yet and most of the functionalities are missing.
+For now only the basic functionalities are implemented in order to build up the
+developing workflow.
 
-## Documentation: 
+## Documentation:
 The documentation can be found here: https://duncdennis.github.io/lorenzpy/
 
-## Installation: 
+## Installation:
 
-#### User installation: 
-Only the core LorenzPy functionality: 
+#### User installation:
+Only the core LorenzPy functionality:
 
 ``
 pip install .
 ``
 
-With plotting functionalities: 
+With plotting functionalities:
 
 ``
 pip install .[plot]
@@ -35,6 +35,6 @@ pip install -e .[dev,plot]
 ``
 
 
-## Resources: 
+## Resources:
 #### Similar package: *pynamical*
 https://github.com/gboeing/pynamical

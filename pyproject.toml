@@ -25,12 +25,13 @@ dependencies = [
 dev = [
     "pytest==7.2.0",
     "pytest-cov==4.0",
-    "black==22.12.0",
+    "black==23.1.0",
     "mypy==1.1.1",
     "ruff==0.0.254",
-    "mkdocs",
-    "mkdocstrings[python]",
-    "mkdocs-material"
+    "mkdocs",  # add version?
+    "mkdocstrings[python]",  # add version?
+    "mkdocs-material",  # add version?
+    "pre-commit==3.1.1",  # add version?
 ]
 plot = [
     "plotly==5.13.1",
@@ -50,7 +51,7 @@ line-length = 88
 files = "src/lorenzpy/"
 
 [[tool.mypy.overrides]]
-module = ['plotly.*']   # ignore missing imports from the plotly package.
+module = ['plotly.*', 'numpy', 'pytest']   # ignore missing imports from the plotly package.
 ignore_missing_imports = true
 
 [tool.ruff]
