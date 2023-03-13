@@ -91,7 +91,7 @@ class _SimBase(ABC):
 
     @abstractmethod
     def iterate(self, x: np.ndarray) -> np.ndarray:
-        """The abstract iterate function."""
+        """Generate the next time step when the previous one is given."""
 
     def simulate(
         self, time_steps: int, starting_point: np.ndarray | None = None
@@ -124,10 +124,10 @@ class _SimBaseRungeKutta(_SimBase):
 
     @abstractmethod
     def flow(self, x: np.ndarray) -> np.ndarray:
-        """The abstract flow function."""
+        """Return the flow of the continuous dynamical system."""
 
     def iterate(self, x: np.ndarray) -> np.ndarray:
-        """Calculates next timestep x(t+dt) with given x(t) using runge kutta.
+        """Calculate the next timestep x(t+dt) with given x(t) using runge kutta.
 
         Args:
             x: the previous point x(t).
@@ -178,7 +178,7 @@ class Lorenz63(_SimBaseRungeKutta):
         self.dt = self.default_parameters["dt"] if dt is None else dt
 
     def flow(self, x: np.ndarray) -> np.ndarray:
-        """Calculates (dx/dt, dy/dt, dz/dt) with given (x,y,z) for RK4.
+        """Calculate (dx/dt, dy/dt, dz/dt) with given (x,y,z) for RK4.
 
         Args:
             x: (x,y,z) coordinates. Needs to have shape (3,).

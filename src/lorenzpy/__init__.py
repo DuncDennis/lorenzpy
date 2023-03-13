@@ -8,4 +8,4 @@ Modules exported by this package:
 
 from . import measures, simulations
 
-__version__ = "0.1.0"
+__version__ = "0.0.1"

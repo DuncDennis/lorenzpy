@@ -1,14 +1,8 @@
-name: Testing lorenzpy
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+name: test and coverage
+on: [pull_request, push, workflow_dispatch]
 
 jobs:
-  install-test:
+  test:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -26,12 +20,6 @@ jobs:
         run: pip --version
       - name: installation of package in dev mode
         run: pip install .[dev]
-      - name: checking with black
-        run: black --check .
-      - name: checking with ruff
-        run: ruff check --format=github .
-      - name: checking with mypy
-        run: mypy
       - name: running pytest
         run: pytest
       - name: Upload coverage reports to Codecov
