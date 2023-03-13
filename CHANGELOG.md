@@ -7,9 +7,7 @@
 - The config for black, ruff and mypy is still in `pyproject.toml`
 - To run the pre-commit manual, run `pre-commit run --all-files`
 - To reinstall the pre-commits, run `pre-commit install`
-- My pre-commit expects to be running on python3.9, I guess?
-  - This is because black is requiring python 3.9.
-  - Try to fix it by removing that from the .pre-commit-config.yaml
+- My pre-commit GH action is running on ubuntu on python3.9
 - **Note:** There is some redundancy, as I have to specify the versions of
     black, ruff and mypy twice. Once in the `.pre-commit-config.yaml` and once in the
     `pyproject.toml`.
