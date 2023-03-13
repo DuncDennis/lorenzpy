@@ -1,7 +1,19 @@
 # Changelog:
 
 ---
-
+### Pre-release status (13.03.2023):
+- Now using [pre-commit](https://pre-commit.com/) as an automatic CI tool.
+- pre-commit runs some standard hooks, black, ruff and mypy.
+- The config for black, ruff and mypy is still in `pyproject.toml`
+- To run the pre-commit manual, run `pre-commit run --all-files`
+- To reinstall the pre-commits, run `pre-commit install`
+- **Note:** There is some redundancy, as I have to specify the versions of
+    black, ruff and mypy twice. Once in the `.pre-commit-config.yaml` and once in the
+    `pyproject.toml`.
+  Maybe I am only specifying which *hook* to use in the `.pre-commit-config.yaml`.
+- Q:
+  - Should I add the tests also to pre-commit?
+  - When to test?
 
 ### Pre-release status (12.03.2023):
 
