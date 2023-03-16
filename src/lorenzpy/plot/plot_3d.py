@@ -5,7 +5,7 @@ import plotly.graph_objects as go
 DEFAULT_FIGSIZE = (650, 500)
 
 
-def test_plotting(time_series: np.ndarray) -> None:
+def plot_3d(time_series: np.ndarray) -> None:
     """Plot simple three-dim time series."""
     fig = go.Figure()
     fig.update_layout(height=DEFAULT_FIGSIZE[1], width=DEFAULT_FIGSIZE[0])
