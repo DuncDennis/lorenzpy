@@ -4,3 +4,5 @@
 
 src/lorenzpy.egg-info
 /coverage.xml
+
+dist

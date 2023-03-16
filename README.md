@@ -6,35 +6,61 @@
 [![license: MIT](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
 [![Python versions](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 
-## 🚧 Under construction 🚧
-There is no release of the package yet and most of the functionalities are missing.
-For now only the basic functionalities are implemented in order to build up the
-developing workflow.
+## ⚙️ Installation
 
-## Documentation:
-The documentation can be found here: https://duncdennis.github.io/lorenzpy/
+To install only the core functionality:
+```bash
+$ pip install lorenzpy
+```
 
-## Installation:
+To install with the additional plotting functionality.
+This also installs `plotly`.
+```bash
+$ pip install lorenzpy[plot]
+```
 
-#### User installation:
-Only the core LorenzPy functionality:
+## ▶️ Usage
 
-``
-pip install .
-``
+LorenzPy can be used to simulate and measure chaotic dynamical systems.
+The following example shows how to simulate the famous
+[Lorenz63 system](https://de.wikipedia.org/wiki/Lorenz-Attraktor), and measure its
+largest [Lyapunov exponent](https://en.wikipedia.org/wiki/Lyapunov_exponent) from the
+Lorenz63 iterator:
 
-With plotting functionalities:
+````python
+import lorenzpy as lpy
 
-``
-pip install .[plot]
-``
+# Initialize the Lorenz63 simulation object with a RK4 time step of dt=0.05
+l63_obj = lpy.simulations.Lorenz63(dt=0.05)
 
-#### Developer installation:
-``
-pip install -e .[dev,plot]
-``
+# Simulate 5000 steps of the Lorenz63 system:
+data = l63_obj.simulate(5000)    # -> data.shape = (5000,3)
 
+# Calculate the largest Lyapunov exponent from the l63_obj iterator:
+iterator = l63_obj.iterate
+lle = lpy.measures.largest_lyapunov_exponent(
+    iterator_func=iterator,
+    starting_point=l63_obj.default_starting_point,
+    dt=l63_obj.dt
+)
+# -> lle = 0.905144329...
+````
 
-## Resources:
-#### Similar package: *pynamical*
-https://github.com/gboeing/pynamical
+The calculated largest Lyapunov exponent of *0.9051...* is very close to the literature
+value of *0.9056*[^SprottChaos].
+
+## 📗 Documentation
+
+- The main documentation can be found here: https://duncdennis.github.io/lorenzpy/
+    - ⚠️: The documentation is not in a useful state.
+##  ⚠️ Further notes:
+- So far the usefulness of this package is very limited.
+The authors main purpose to creating this package was to learn the full workflow to
+develop a Python package.
+More information about the development process can be found in [CONTRIBUTING.md](CONTRIBUTING.md).
+- The plotting functionality, which can be installed with ``pip install lorenzpy[plot]`` is not tested so far.
+- See [Pynamical](https://github.com/gboeing/pynamical) for a similar package
+
+[^SprottChaos]:
+    Sprott, Julien Clinton, and Julien C. Sprott. Chaos and time-series analysis. Vol. 69.
+    Oxford: Oxford university press, 2003.

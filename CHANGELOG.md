@@ -1,6 +1,10 @@
 # Changelog:
 
----
+<!--next-version-placeholder-->
+
+### v0.0.1 (16.03.2023)
+- First release of `lorenzpy`
+
 ### Pre-release status (13.03.2023):
 - Now using [pre-commit](https://pre-commit.com/) as an automatic CI tool.
 - pre-commit runs some standard hooks, black, ruff and mypy.
