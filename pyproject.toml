@@ -17,7 +17,7 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 dependencies = [
-    "numpy==1.24.2",  # maybe change to numpy>=1.22.0
+    "numpy>=1.22.0",
 ]
 
 [project.urls]
@@ -40,7 +40,7 @@ dev = [
     "pre-commit==3.1.1",  # add version?
 ]
 plot = [
-    "plotly==5.13.1",
+    "plotly>=5.11",
 ]
 
 [tool.pytest.ini_options]
