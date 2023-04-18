@@ -51,3 +51,9 @@ def test_simulation_with_wrong_dim_of_starting_point():
 
     with pytest.raises(ValueError):
         test_sim.simulate(time_steps=10, starting_point=wrong_starting_point)
+
+
+def test_mackey_glass_simulation_shape():
+    """Testing that the MackeyGlass simulation outputs the correct shape."""
+    shape = simulations.MackeyGlass().simulate(2).shape
+    assert shape == (2, 1)

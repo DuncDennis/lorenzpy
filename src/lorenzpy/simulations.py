@@ -194,3 +194,114 @@ class Lorenz63(_SimBaseRungeKutta):
                 x[0] * x[1] - self.beta * x[2],
             ]
         )
+
+
+class MackeyGlass:
+    """Simulate the Mackey-Glass delay differential system.
+
+    TODO: Add literature values for Lyapunov etc.
+    TODO: Hint the differences between this class and the other Sim classes (delay).
+    TODO: Check if the structure is really good?
+    TODO: Add Proper Tests.
+    TODO: Decide whether to use the simple forward-euler or RK4-style update.
+
+    Note: As the Mackey-Glass system is a delay-differential equation, the class does
+    not contain a simple iterate function.
+    """
+
+    default_parameters = {"a": 0.2, "b": 0.1, "c": 10, "tau": 23.0, "dt": 0.1}
+    default_starting_point = np.array([0.9])
+    sys_dim = 1
+
+    def __init__(
+        self,
+        a: float | None = None,
+        b: float | None = None,
+        c: int | None = None,
+        tau: float | None = None,
+        dt: float | None = None,
+    ) -> None:
+        """Define the Mackey-Glass system parameters.
+
+        Args:
+            a: "a" parameter of the Mackey-Glass equation.
+            b: "b" parameter of the Mackey-Glass equation.
+            c: "c" parameter of the Mackey-Glass equation.
+            tau: Time delay of Mackey-Glass equation.
+            dt: Size of time steps.
+        """
+        self.a = self.default_parameters["a"] if a is None else a
+        self.b = self.default_parameters["b"] if b is None else b
+        self.c = self.default_parameters["c"] if c is None else c
+        self.tau = self.default_parameters["tau"] if tau is None else tau
+        self.dt = self.default_parameters["dt"] if dt is None else dt
+
+        # The number of time steps between t=0 and t=-tau:
+        self.history_steps = int(self.tau / self.dt)
+
+    def flow_mg(self, x: np.ndarray, x_past: np.ndarray) -> np.ndarray:
+        """Calculate the flow of the Mackey-Glass equation.
+
+        Args:
+            x: The immediate value of the system. Needs to have shape (1,).
+            x_past: The delayed value of the system. Needs to have shape (1,).
+
+        Returns:
+            : The flow corresponding to x and x_past.
+        """
+        return np.array(
+            [self.a * x_past[0] / (1 + x_past[0] ** self.c) - self.b * x[0]]
+        )
+
+    def iterate_mg(self, x: np.ndarray, x_past: np.ndarray) -> np.ndarray:
+        """Calculate the next time step in the Mackey-Glass equation.
+
+        Args:
+            x: The immediate value of the system. Needs to have shape (1,).
+            x_past: The delayed value of the system. Needs to have shape (1,).
+
+        Returns:
+            : The next value given the immediate and delayed values.
+        """
+        return x + self.dt * self.flow_mg(x, x_past)
+        # f = lambda x_use: self.flow_mg(x_use, x_past)
+        # return _runge_kutta(f, self.dt, x)
+
+    def simulate(
+        self, time_steps: int, starting_point: np.ndarray | None = None
+    ) -> np.ndarray:
+        """Simulate the Mackey-Glass trajectory.
+
+        Args:
+            time_steps: Number of time steps t to simulate.
+            starting_point: Starting point of the trajectory shape (sys_dim,).
+                            If None, take the default starting point.
+
+        Returns:
+            Trajectory of shape (t, sys_dim).
+
+        """
+        if starting_point is None:
+            starting_point = self.default_starting_point
+        else:
+            if starting_point.size != self.sys_dim:
+                raise ValueError(
+                    "Provided starting_point has the wrong dimension. "
+                    f"{self.sys_dim} was expected and {starting_point.size} "
+                    "was given"
+                )
+
+        traj_w_hist = np.zeros((self.history_steps + time_steps, self.sys_dim))
+        traj_w_hist[: self.history_steps, :] = np.repeat(
+            starting_point, self.history_steps
+        )[:, np.newaxis]
+        traj_w_hist[self.history_steps, :] = starting_point
+
+        for t in range(1, time_steps):
+            t_shifted = t + self.history_steps
+            traj_w_hist[t_shifted] = self.iterate_mg(
+                traj_w_hist[t_shifted - 1],
+                traj_w_hist[t_shifted - 1 - self.history_steps],
+            )
+
+        return traj_w_hist[self.history_steps :, :]
