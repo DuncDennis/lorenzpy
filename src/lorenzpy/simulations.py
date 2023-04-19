@@ -4,6 +4,7 @@ Every dynamical system is represented as a class.
 
 The available classes are:
 - Lorenz63
+- MackeyGlass
 
 The system's parameters are introduced in the class's constructor.
 
