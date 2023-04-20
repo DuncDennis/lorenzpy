@@ -3,9 +3,10 @@ import numpy as np
 import pytest
 
 from lorenzpy import simulations
+from lorenzpy.simulations._base import _BaseSimIterate
 
 
-class DemoSim(simulations._SimBase):
+class DemoSim(_BaseSimIterate):
     """A simple simulation class subclassing simulations._SimBase."""
 
     sys_dim = 3
@@ -17,6 +18,10 @@ class DemoSim(simulations._SimBase):
     def iterate(self, x: np.ndarray) -> np.ndarray:
         """Just return the same value again."""
         return x
+
+    def get_default_starting_pnt(self) -> np.ndarray:
+        """Return some default starting point."""
+        return np.array([0, 0, 0])
 
 
 def test_lorenz63_simulation_shape():
