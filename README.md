@@ -40,7 +40,7 @@ data = l63_obj.simulate(5000)    # -> data.shape = (5000,3)
 iterator = l63_obj.iterate
 lle = lpy.measures.largest_lyapunov_exponent(
     iterator_func=iterator,
-    starting_point=l63_obj.default_starting_point,
+    starting_point=l63_obj.get_default_starting_pnt(),
     dt=l63_obj.dt
 )
 # -> lle = 0.905144329...
