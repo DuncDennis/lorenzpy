@@ -9,7 +9,7 @@ from typing import Any, Callable
 import numpy as np
 
 
-def _forward_euler(
+def forward_euler(
     f: Callable[[np.ndarray], np.ndarray], dt: float, x: np.ndarray
 ) -> np.ndarray:
     """Simulate one step for ODEs of the form dx/dt = f(x(t)) using the forward euler.
@@ -26,7 +26,7 @@ def _forward_euler(
     return x + dt * f(x)
 
 
-def _runge_kutta(
+def runge_kutta(
     f: Callable[[np.ndarray], np.ndarray], dt: float, x: np.ndarray
 ) -> np.ndarray:
     """Simulate one step for ODEs of the form dx/dt = f(x(t)) using Runge-Kutta.
@@ -48,7 +48,7 @@ def _runge_kutta(
     return next_step
 
 
-def _timestep_iterator(
+def timestep_iterator(
     f: Callable[[np.ndarray], np.ndarray], time_steps: int, starting_point: np.ndarray
 ) -> np.ndarray:
     """Iterate an iterator-function f: x(i+1) = f(x(i)) multiple times."""
@@ -142,7 +142,7 @@ class _BaseSimIterate(_BaseSim):
             time_steps: Number of time steps t to simulate.
             starting_point: Starting point of the trajectory shape (sys_dim,).
                             If None, take the default starting point.
-            transient: TBD
+            transient: Discard the first <transient> steps in the output.
 
         Returns:
             Trajectory of shape (t, sys_dim).
@@ -151,7 +151,7 @@ class _BaseSimIterate(_BaseSim):
         if starting_point is None:
             starting_point = self.get_default_starting_pnt()
 
-        return _timestep_iterator(self.iterate, time_steps + transient, starting_point)[
+        return timestep_iterator(self.iterate, time_steps + transient, starting_point)[
             transient:, :
         ]
 
@@ -185,9 +185,9 @@ class _BaseSimFlow(_BaseSimIterate):
         """
         if isinstance(self.solver, str):
             if self.solver == "rk4":
-                x_next = _runge_kutta(self.flow, self.dt, x)
+                x_next = runge_kutta(self.flow, self.dt, x)
             elif self.solver == "forward_euler":
-                x_next = _forward_euler(self.flow, self.dt, x)
+                x_next = forward_euler(self.flow, self.dt, x)
             else:
                 raise ValueError(f"Unsupported solver: {self.solver}")
         else:

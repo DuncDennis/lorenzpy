@@ -3,7 +3,7 @@ import numpy as np
 import pytest
 
 from lorenzpy import simulations  # type: ignore
-from lorenzpy.simulations._base import _BaseSimFlow, _BaseSimIterate  # type: ignore
+from lorenzpy.simulations.base import _BaseSimFlow, _BaseSimIterate  # type: ignore
 
 
 @pytest.fixture

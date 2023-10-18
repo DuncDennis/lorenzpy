@@ -5,7 +5,7 @@ from typing import Callable
 
 import numpy as np
 
-from ._base import _BaseSim, _BaseSimIterate, _forward_euler, _runge_kutta
+from .base import _BaseSim, _BaseSimIterate, forward_euler, runge_kutta
 
 
 class KuramotoSivashinsky(_BaseSimIterate):
@@ -34,23 +34,20 @@ class KuramotoSivashinsky(_BaseSimIterate):
         eps: float = 0.0,
         dt: float = 0.1,
     ) -> None:
+        """Initialize the Kuramoto-Sivashinsky simulation object.
+
+        Args:
+            sys_dim: The dimension of the system.
+            sys_length: The physical length of the system.
+            eps: A parameter in front of the y_xx term.
+            dt: Time step to simulate.
+        """
         self.sys_dim = sys_dim
         self.sys_length = sys_length
         self.eps = eps
         self.dt = dt
 
         self._prepare()
-
-    def get_default_starting_pnt(self) -> np.ndarray:
-        x = (
-            self.sys_length
-            * np.transpose(np.conj(np.arange(1, self.sys_dim + 1)))
-            / self.sys_dim
-        )
-        return np.array(
-            np.cos(2 * np.pi * x / self.sys_length)
-            * (1 + np.sin(2 * np.pi * x / self.sys_length))
-        )
 
     def _prepare(self) -> None:
         """Calculate internal attributes.
@@ -117,6 +114,18 @@ class KuramotoSivashinsky(_BaseSimIterate):
         v = self.E * v + Nv * self.f1 + 2 * (Na + Nb) * self.f2 + Nc * self.f3
         return np.real(np.fft.ifft(v))
 
+    def get_default_starting_pnt(self) -> np.ndarray:
+        """Return default starting point of KS system."""
+        x = (
+            self.sys_length
+            * np.transpose(np.conj(np.arange(1, self.sys_dim + 1)))
+            / self.sys_dim
+        )
+        return np.array(
+            np.cos(2 * np.pi * x / self.sys_length)
+            * (1 + np.sin(2 * np.pi * x / self.sys_length))
+        )
+
 
 class MackeyGlass(_BaseSim):
     """Simulate the Mackey-Glass delay differential system.
@@ -140,6 +149,7 @@ class MackeyGlass(_BaseSim):
         dt: float = 0.1,
         solver: str | Callable = "rk4",
     ) -> None:
+        """Initialize the Mackey-Glass simulation object."""
         self.a = a
         self.b = b
         self.c = c
@@ -151,6 +161,7 @@ class MackeyGlass(_BaseSim):
         self.history_steps = int(self.tau / self.dt)
 
     def get_default_starting_pnt(self) -> np.ndarray:
+        """Return default starting point of MG system."""
         return np.array([0.9])
 
     def flow_mg(self, x: np.ndarray, x_past: np.ndarray) -> np.ndarray:
@@ -183,9 +194,9 @@ class MackeyGlass(_BaseSim):
 
         if isinstance(self.solver, str):
             if self.solver == "rk4":
-                x_next = _runge_kutta(flow_like, self.dt, x)
+                x_next = runge_kutta(flow_like, self.dt, x)
             elif self.solver == "forward_euler":
-                x_next = _forward_euler(flow_like, self.dt, x)
+                x_next = forward_euler(flow_like, self.dt, x)
             else:
                 raise ValueError(f"Unsupported solver: {self.solver}")
         else:
