@@ -9,8 +9,11 @@ repos:
     hooks:
     -   id: black
         language_version: python3
+
+    # Issue: pydocstyle (D) is somehow not checked in pre-commit.
+    # When running "ruff ." it is included though.
 -   repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: 'v0.0.245'
+    rev: 'v0.1.0'
     hooks:
     -   id: ruff
 -   repo: https://github.com/pre-commit/mirrors-mypy

@@ -118,7 +118,7 @@ def test_get_default_params(all_sim_classes):
     """Get the default parameters of each sim class."""
     for sim_class in all_sim_classes:
         default_params = sim_class.get_default_params()
-        assert type(default_params) == dict
+        assert isinstance(default_params, dict)
 
 
 def test_get_params(all_sim_classes):
@@ -126,7 +126,7 @@ def test_get_params(all_sim_classes):
     for sim_class in all_sim_classes:
         sim_obj = sim_class()
         params = sim_obj.get_params()
-        assert type(params) == dict
+        assert isinstance(params, dict)
 
 
 def test_unsupported_solver():

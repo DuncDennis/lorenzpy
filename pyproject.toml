@@ -33,7 +33,7 @@ dev = [
     "pytest-cov==4.0",
     "black==23.1.0",
     "mypy==1.1.1",
-    "ruff==0.0.254",
+    "ruff==0.1.0",
     "mkdocs",  # add version?
     "mkdocstrings[python]",  # add version?
     "mkdocs-material",  # add version?
