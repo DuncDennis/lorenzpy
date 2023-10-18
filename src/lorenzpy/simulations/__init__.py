@@ -47,13 +47,14 @@ TODO <below>
       https://github.com/mkdocstrings/mkdocstrings/issues/78
 """
 
-from .autonomous_flows import Lorenz63, Lorenz96
+from .autonomous_flows import Lorenz63, Lorenz96, Roessler
 from .discrete_maps import Logistic
 from .driven_systems import SimplestDrivenChaotic
 from .others import KuramotoSivashinsky, MackeyGlass
 
 __all__ = [
     "Lorenz63",
+    "Roessler",
     "Lorenz96",
     "Logistic",
     "SimplestDrivenChaotic",

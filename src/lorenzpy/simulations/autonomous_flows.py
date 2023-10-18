@@ -52,6 +52,42 @@ class Lorenz63(_BaseSimFlow):
         return np.array([0.0, -0.01, 9.0])
 
 
+class Roessler(_BaseSimFlow):
+    """Simulation class for the Roessler system."""
+
+    def __init__(
+        self,
+        a: float = 0.2,
+        b: float = 0.2,
+        c: float = 5.7,
+        dt: float = 0.1,
+        solver: str | str | Callable[[Callable, float, np.ndarray], np.ndarray] = "rk4",
+    ):
+        """Initialize the Roessler simulation object.
+
+        Args:
+            a: a parameter of Roessler equation.
+            b: b parameter of Roessler equation.
+            c: c parameter of Roessler equation.
+            dt: Time step to simulate.
+            solver: The solver.
+        """
+        super().__init__(dt, solver)
+        self.a = a
+        self.b = b
+        self.c = c
+
+    def flow(self, x: np.ndarray) -> np.ndarray:
+        """Return the flow of Roessler equation."""
+        return np.array(
+            [-x[1] - x[2], x[0] + self.a * x[1], self.b + x[2] * (x[0] - self.c)]
+        )
+
+    def get_default_starting_pnt(self) -> np.ndarray:
+        """Return default starting point of Roessler system."""
+        return np.array([-9.0, 0.0, 0.0])
+
+
 class Lorenz96(_BaseSimFlow):
     """Simulate the n-dimensional Lorenz 96 model."""
 

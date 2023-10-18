@@ -52,14 +52,15 @@ value of *0.9056*[^SprottChaos].
 ## 💫 Supported systems
 
 
-|             Name            |             Type            | System Dimension |
+|            Name             |             Type            | System Dimension |
 |:---------------------------:|:---------------------------:|:----------------:|
-| `Lorenz63`                  | autonomous dissipative flow |         3        |
-| `Lorenz96`                  | autonomous dissipative flow |     variable     |
-| `Logistic`                  | noninvertible map           |         1        |
+|         `Lorenz63`          | autonomous dissipative flow |         3        |
+|         `Roessler`          | autonomous dissipative flow |         3        |
+|         `Lorenz96`          | autonomous dissipative flow |     variable     |
+|         `Logistic`          | noninvertible map           |         1        |
 | `SimplestDrivenChaoticFlow` | conservative flow           | 2 space + 1 time |
-| `KuramotoSivashinsky`       | PDE                         |     variable     |
-| `MackeyGlass`               | delay differential equation |     variable     |
+|    `KuramotoSivashinsky`    | PDE                         |     variable     |
+|        `MackeyGlass`        | delay differential equation |     variable     |
 ## 📗 Documentation
 
 - The main documentation can be found here: https://duncdennis.github.io/lorenzpy/
