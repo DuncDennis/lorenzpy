@@ -49,11 +49,22 @@ lle = lpy.measures.largest_lyapunov_exponent(
 The calculated largest Lyapunov exponent of *0.9051...* is very close to the literature
 value of *0.9056*[^SprottChaos].
 
+## 💫 Supported systems
+
+
+|             Name            |             Type            | System Dimension |
+|:---------------------------:|:---------------------------:|:----------------:|
+| `Lorenz63`                  | autonomous dissipative flow |         3        |
+| `Lorenz96`                  | autonomous dissipative flow |     variable     |
+| `Logistic`                  | noninvertible map           |         1        |
+| `SimplestDrivenChaoticFlow` | conservative flow           | 2 space + 1 time |
+| `KuramotoSivashinsky`       | PDE                         |     variable     |
+| `MackeyGlass`               | delay differential equation |     variable     |
 ## 📗 Documentation
 
 - The main documentation can be found here: https://duncdennis.github.io/lorenzpy/
     - ⚠️: The documentation is not in a useful state.
-##  ⚠️ Further notes:
+##  ⚠️ Further notes
 - So far the usefulness of this package is very limited.
 The authors main purpose to creating this package was to learn the full workflow to
 develop a Python package.

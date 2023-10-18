@@ -1,4 +1,6 @@
 """Autonomous flows."""
+from typing import Callable
+
 import numpy as np
 
 from .base import _BaseSimFlow
@@ -9,13 +11,16 @@ class Lorenz63(_BaseSimFlow):
 
     This function is able to simulate the chaotic dynamical system originally
     introduced by Lorenz.
-
-    Attributes:
-        sigma: Sigma parameter.
-        rho: rho parameter.
     """
 
-    def __init__(self, sigma=10.0, rho=28.0, beta=8 / 3, dt=0.1, solver="rk4"):
+    def __init__(
+        self,
+        sigma: float = 10.0,
+        rho: float = 28.0,
+        beta: float = 8 / 3,
+        dt: float = 0.1,
+        solver: str | str | Callable[[Callable, float, np.ndarray], np.ndarray] = "rk4",
+    ):
         """Initialize the Lorenz63 simulation object.
 
         Args:
@@ -49,7 +54,11 @@ class Lorenz96(_BaseSimFlow):
     """Simulate the n-dimensional Lorenz 96 model."""
 
     def __init__(
-        self, sys_dim: int = 30, force: float = 8.0, dt: float = 0.05, solver="rk4"
+        self,
+        sys_dim: int = 30,
+        force: float = 8.0,
+        dt: float = 0.05,
+        solver: str | str | Callable[[Callable, float, np.ndarray], np.ndarray] = "rk4",
     ) -> None:
         """Initialize the Lorenz96 simulation object.
 
