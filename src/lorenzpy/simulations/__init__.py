@@ -47,17 +47,39 @@ TODO <below>
       https://github.com/mkdocstrings/mkdocstrings/issues/78
 """
 from . import solvers
-from .autonomous_flows import DoublePendulum, Lorenz63, Lorenz96, Roessler
-from .discrete_maps import Logistic
+from .autonomous_flows import (
+    Chen,
+    ChuaCircuit,
+    ComplexButterfly,
+    DoublePendulum,
+    DoubleScroll,
+    Halvorsen,
+    Lorenz63,
+    Lorenz96,
+    Roessler,
+    Rucklidge,
+    Thomas,
+    WindmiAttractor,
+)
+from .discrete_maps import Henon, Logistic
 from .driven_systems import SimplestDrivenChaotic
 from .others import KuramotoSivashinsky, MackeyGlass
 
 __all__ = [
     "Lorenz63",
     "Roessler",
+    "ComplexButterfly",
+    "Chen",
+    "ChuaCircuit",
+    "Thomas",
+    "WindmiAttractor",
+    "Rucklidge",
+    "Halvorsen",
+    "DoubleScroll",
     "DoublePendulum",
     "Lorenz96",
     "Logistic",
+    "Henon",
     "SimplestDrivenChaotic",
     "KuramotoSivashinsky",
     "MackeyGlass",

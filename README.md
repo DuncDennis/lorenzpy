@@ -52,15 +52,25 @@ value of *0.9056*[^SprottChaos].
 ## 💫 Supported systems
 
 
-|            Name             |             Type            | System Dimension |
-|:---------------------------:|:---------------------------:|:----------------:|
-|         `Lorenz63`          | autonomous dissipative flow |         3        |
-|         `Roessler`          | autonomous dissipative flow |         3        |
-|         `Lorenz96`          | autonomous dissipative flow |     variable     |
-|         `Logistic`          | noninvertible map           |         1        |
-| `SimplestDrivenChaoticFlow` | conservative flow           | 2 space + 1 time |
-|    `KuramotoSivashinsky`    | PDE                         |     variable     |
-|        `MackeyGlass`        | delay differential equation |     variable     |
+| Name                                  | Type                        | System Dimension |
+|:--------------------------------------|-----------------------------|:-----------------|
+| `Lorenz63`                            | autonomous dissipative flow | 3                |
+| `Roessler`                            | autonomous dissipative flow | 3                |
+| `ComplexButterfly`                    | autonomous dissipative flow | 3                |
+| `Chen`                                | autonomous dissipative flow | 3                |
+| `ChuaCircuit`                         | autonomous dissipative flow | 3                |
+| `Thomas`                              | autonomous dissipative flow | 3                |
+| `WindmiAttractor`                     | autonomous dissipative flow | 3                |
+| `Rucklidge`                     | autonomous dissipative flow | 3                |
+| `Halvorsen`                     | autonomous dissipative flow | 3                |
+| `DoubleScroll`                     | autonomous dissipative flow | 3                |
+| `Lorenz96`                            | autonomous dissipative flow | variable         |
+| `DoublePendulum`                      | conservative flow           | 4                |
+| `Logistic`                            | noninvertible map           | 1                |
+| `Henon`                               | dissipative map             | 2                |
+| `SimplestDrivenChaoticFlow`           | conservative flow           | 2 space + 1 time |
+| `KuramotoSivashinsky`                 | PDE                         | variable         |
+| `MackeyGlass`                         | delay differential equation | variable         |
 ## 📗 Documentation
 
 - The main documentation can be found here: https://duncdennis.github.io/lorenzpy/

@@ -21,7 +21,7 @@ class Lorenz63(_BaseSimFlow):
         sigma: float = 10.0,
         rho: float = 28.0,
         beta: float = 8 / 3,
-        dt: float = 0.1,
+        dt: float = 0.05,
         solver: str | str | Callable[[Callable, float, np.ndarray], np.ndarray] = "rk4",
     ):
         """Initialize the Lorenz63 simulation object.
@@ -87,6 +87,289 @@ class Roessler(_BaseSimFlow):
     def get_default_starting_pnt(self) -> np.ndarray:
         """Return default starting point of Roessler system."""
         return np.array([-9.0, 0.0, 0.0])
+
+
+class ComplexButterfly(_BaseSimFlow):
+    """Simulation class for the ComplexButterfly system."""
+
+    def __init__(
+        self,
+        a: float = 0.55,
+        dt: float = 0.05,
+        solver: str | str | Callable[[Callable, float, np.ndarray], np.ndarray] = "rk4",
+    ):
+        """Initialize the ComplexButterfly simulation object.
+
+        Args:
+            a: a parameter of ComplexButterfly equation.
+            dt: Time step to simulate.
+            solver: The solver.
+        """
+        super().__init__(dt, solver)
+        self.a = a
+
+    def flow(self, x: np.ndarray) -> np.ndarray:
+        """Return the flow of ComplexButterfly equation."""
+        return np.array(
+            [self.a * (x[1] - x[0]), -x[2] * np.sign(x[0]), np.abs(x[0]) - 1]
+        )
+
+    def get_default_starting_pnt(self) -> np.ndarray:
+        """Return default starting point of ComplexButterfly system."""
+        return np.array([0.2, 0.0, 0.0])
+
+
+class Chen(_BaseSimFlow):
+    """Simulation class for the Chen system."""
+
+    def __init__(
+        self,
+        a: float = 35.0,
+        b: float = 3.0,
+        c: float = 28.0,
+        dt: float = 0.02,
+        solver: str | str | Callable[[Callable, float, np.ndarray], np.ndarray] = "rk4",
+    ):
+        """Initialize the Chen simulation object.
+
+        Args:
+            a: a parameter of Chen equation.
+            b: b parameter of Chen equation.
+            c: c parameter of Chen equation.
+            dt: Time step to simulate.
+            solver: The solver.
+        """
+        super().__init__(dt, solver)
+        self.a = a
+        self.b = b
+        self.c = c
+
+    def flow(self, x: np.ndarray) -> np.ndarray:
+        """Return the flow of Chen equation."""
+        return np.array(
+            [
+                self.a * (x[1] - x[0]),
+                (self.c - self.a) * x[0] - x[0] * x[2] + self.c * x[1],
+                x[0] * x[1] - self.b * x[2],
+            ]
+        )
+
+    def get_default_starting_pnt(self) -> np.ndarray:
+        """Return default starting point of Chen system."""
+        return np.array([-10.0, 0.0, 37.0])
+
+
+class ChuaCircuit(_BaseSimFlow):
+    """Simulation class for the ChuaCircuit system."""
+
+    def __init__(
+        self,
+        alpha: float = 9.0,
+        beta: float = 100 / 7,
+        a: float = 8 / 7,
+        b: float = 5 / 7,
+        dt: float = 0.1,
+        solver: str | str | Callable[[Callable, float, np.ndarray], np.ndarray] = "rk4",
+    ):
+        """Initialize the ChuaCircuit simulation object.
+
+        Args:
+            alpha: alpha parameter of ChuaCircuit equation.
+            beta: beta parameter of ChuaCircuit equation.
+            a: a parameter of ChuaCircuit equation.
+            b: b parameter of ChuaCircuit equation.
+            dt: Time step to simulate.
+            solver: The solver.
+        """
+        super().__init__(dt, solver)
+        self.alpha = alpha
+        self.beta = beta
+        self.a = a
+        self.b = b
+
+    def flow(self, x: np.ndarray) -> np.ndarray:
+        """Return the flow of ChuaCircuit equation."""
+        return np.array(
+            [
+                self.alpha
+                * (
+                    x[1]
+                    - x[0]
+                    + self.b * x[0]
+                    + 0.5 * (self.a - self.b) * (np.abs(x[0] + 1) - np.abs(x[0] - 1))
+                ),
+                x[0] - x[1] + x[2],
+                -self.beta * x[1],
+            ]
+        )
+
+    def get_default_starting_pnt(self) -> np.ndarray:
+        """Return default starting point of ChuaCircuit system."""
+        return np.array([0.0, 0.0, 0.6])
+
+
+class Thomas(_BaseSimFlow):
+    """Simulation class for the Thomas system."""
+
+    def __init__(
+        self,
+        b: float = 0.18,
+        dt: float = 0.3,
+        solver: str | str | Callable[[Callable, float, np.ndarray], np.ndarray] = "rk4",
+    ):
+        """Initialize the Thomas simulation object.
+
+        Args:
+            b: b parameter of Thomas equation.
+            dt: Time step to simulate.
+            solver: The solver.
+        """
+        super().__init__(dt, solver)
+        self.b = b
+
+    def flow(self, x: np.ndarray) -> np.ndarray:
+        """Return the flow of Thomas equation."""
+        return np.array(
+            [
+                -self.b * x[0] + np.sin(x[1]),
+                -self.b * x[1] + np.sin(x[2]),
+                -self.b * x[2] + np.sin(x[0]),
+            ]
+        )
+
+    def get_default_starting_pnt(self) -> np.ndarray:
+        """Return default starting point of Thomas system."""
+        return np.array([0.1, 0.0, 0.0])
+
+
+class WindmiAttractor(_BaseSimFlow):
+    """Simulation class for the WindmiAttractor system."""
+
+    def __init__(
+        self,
+        a: float = 0.7,
+        b: float = 2.5,
+        dt: float = 0.2,
+        solver: str | str | Callable[[Callable, float, np.ndarray], np.ndarray] = "rk4",
+    ):
+        """Initialize the WindmiAttractor simulation object.
+
+        Args:
+            a: a parameter of WindmiAttractor equation.
+            b: b parameter of WindmiAttractor equation.
+            dt: Time step to simulate.
+            solver: The solver.
+        """
+        super().__init__(dt, solver)
+        self.a = a
+        self.b = b
+
+    def flow(self, x: np.ndarray) -> np.ndarray:
+        """Return the flow of WindmiAttractor equation."""
+        return np.array([x[1], x[2], -self.a * x[2] - x[1] + self.b - np.exp(x[0])])
+
+    def get_default_starting_pnt(self) -> np.ndarray:
+        """Return default starting point of WindmiAttractor system."""
+        return np.array([0.0, 0.8, 0.0])
+
+
+class Rucklidge(_BaseSimFlow):
+    """Simulation class for the Rucklidge system."""
+
+    def __init__(
+        self,
+        kappa: float = 2.0,
+        lam: float = 6.7,
+        dt: float = 0.1,
+        solver: str | str | Callable[[Callable, float, np.ndarray], np.ndarray] = "rk4",
+    ):
+        """Initialize the Rucklidge simulation object.
+
+        Args:
+            kappa: kappa parameter of Rucklidge equation.
+            lam: lambda parameter of Rucklidge equation.
+            dt: Time step to simulate.
+            solver: The solver.
+        """
+        super().__init__(dt, solver)
+        self.kappa = kappa
+        self.lam = lam
+
+    def flow(self, x: np.ndarray) -> np.ndarray:
+        """Return the flow of Rucklidge equation."""
+        return np.array(
+            [
+                -self.kappa * x[0] + self.lam * x[1] - x[1] * x[2],
+                x[0],
+                -x[2] + x[1] ** 2,
+            ]
+        )
+
+    def get_default_starting_pnt(self) -> np.ndarray:
+        """Return default starting point of Rucklidge system."""
+        return np.array([1.0, 0.0, 4.5])
+
+
+class Halvorsen(_BaseSimFlow):
+    """Simulation class for the Halvorsen system."""
+
+    def __init__(
+        self,
+        a: float = 1.27,
+        dt: float = 0.05,
+        solver: str | str | Callable[[Callable, float, np.ndarray], np.ndarray] = "rk4",
+    ):
+        """Initialize the Halvorsen simulation object.
+
+        Args:
+            a: a parameter of Halvorsen equation.
+            dt: Time step to simulate.
+            solver: The solver.
+        """
+        super().__init__(dt, solver)
+        self.a = a
+
+    def flow(self, x: np.ndarray) -> np.ndarray:
+        """Return the flow of Halvorsen equation."""
+        return np.array(
+            [
+                -self.a * x[0] - 4 * x[1] - 4 * x[2] - x[1] ** 2,
+                -self.a * x[1] - 4 * x[2] - 4 * x[0] - x[2] ** 2,
+                -self.a * x[2] - 4 * x[0] - 4 * x[1] - x[0] ** 2,
+            ]
+        )
+
+    def get_default_starting_pnt(self) -> np.ndarray:
+        """Return default starting point of Halvorsen system."""
+        return np.array([-5.0, 0.0, 0.0])
+
+
+class DoubleScroll(_BaseSimFlow):
+    """Simulation class for the DoubleScroll system."""
+
+    def __init__(
+        self,
+        a: float = 0.8,
+        dt: float = 0.3,
+        solver: str | str | Callable[[Callable, float, np.ndarray], np.ndarray] = "rk4",
+    ):
+        """Initialize the DoubleScroll simulation object.
+
+        Args:
+            a: a parameter of DoubleScroll equation.
+            dt: Time step to simulate.
+            solver: The solver.
+        """
+        super().__init__(dt, solver)
+        self.a = a
+
+    def flow(self, x: np.ndarray) -> np.ndarray:
+        """Return the flow of DoubleScroll equation."""
+        return np.array([x[1], x[2], -self.a * (x[2] + x[1] + x[0] - np.sign(x[0]))])
+
+    def get_default_starting_pnt(self) -> np.ndarray:
+        """Return default starting point of DoubleScroll system."""
+        return np.array([0.01, 0.01, 0.0])
 
 
 class DoublePendulum(_BaseSimFlow):
