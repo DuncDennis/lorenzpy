@@ -8,57 +8,7 @@ from typing import Any, Callable
 
 import numpy as np
 
-
-def forward_euler(
-    f: Callable[[np.ndarray], np.ndarray], dt: float, x: np.ndarray
-) -> np.ndarray:
-    """Simulate one step for ODEs of the form dx/dt = f(x(t)) using the forward euler.
-
-    Args:
-        f: function used to calculate the time derivative at point x.
-        dt: time step size.
-        x: d-dim position at time t.
-
-    Returns:
-       d-dim position at time t+dt.
-
-    """
-    return x + dt * f(x)
-
-
-def runge_kutta(
-    f: Callable[[np.ndarray], np.ndarray], dt: float, x: np.ndarray
-) -> np.ndarray:
-    """Simulate one step for ODEs of the form dx/dt = f(x(t)) using Runge-Kutta.
-
-    Args:
-        f: function used to calculate the time derivative at point x.
-        dt: time step size.
-        x: d-dim position at time t.
-
-    Returns:
-       d-dim position at time t+dt.
-
-    """
-    k1: np.ndarray = dt * f(x)
-    k2: np.ndarray = dt * f(x + k1 / 2)
-    k3: np.ndarray = dt * f(x + k2 / 2)
-    k4: np.ndarray = dt * f(x + k3)
-    next_step: np.ndarray = x + 1.0 / 6 * (k1 + 2 * k2 + 2 * k3 + k4)
-    return next_step
-
-
-def timestep_iterator(
-    f: Callable[[np.ndarray], np.ndarray], time_steps: int, starting_point: np.ndarray
-) -> np.ndarray:
-    """Iterate an iterator-function f: x(i+1) = f(x(i)) multiple times."""
-    starting_point = np.array(starting_point)
-    traj_size = (time_steps, starting_point.shape[0])
-    traj = np.zeros(traj_size)
-    traj[0, :] = starting_point
-    for t in range(1, traj_size[0]):
-        traj[t] = f(traj[t - 1])
-    return traj
+from . import solvers
 
 
 class _BaseSim(ABC):
@@ -151,9 +101,9 @@ class _BaseSimIterate(_BaseSim):
         if starting_point is None:
             starting_point = self.get_default_starting_pnt()
 
-        return timestep_iterator(self.iterate, time_steps + transient, starting_point)[
-            transient:, :
-        ]
+        return solvers.timestep_iterator(
+            self.iterate, time_steps + transient, starting_point
+        )[transient:, :]
 
 
 class _BaseSimFlow(_BaseSimIterate):
@@ -185,9 +135,9 @@ class _BaseSimFlow(_BaseSimIterate):
         """
         if isinstance(self.solver, str):
             if self.solver == "rk4":
-                x_next = runge_kutta(self.flow, self.dt, x)
+                x_next = solvers.runge_kutta_4(self.flow, self.dt, x)
             elif self.solver == "forward_euler":
-                x_next = forward_euler(self.flow, self.dt, x)
+                x_next = solvers.forward_euler(self.flow, self.dt, x)
             else:
                 raise ValueError(f"Unsupported solver: {self.solver}")
         else:

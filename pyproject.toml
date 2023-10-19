@@ -18,6 +18,7 @@ classifiers = [
 ]
 dependencies = [
     "numpy>=1.22.0",
+    "scipy>=1.10.0",
 ]
 
 [project.urls]
@@ -57,7 +58,7 @@ line-length = 88
 files = "src/lorenzpy/"
 
 [[tool.mypy.overrides]]
-module = ['plotly.*', 'numpy', 'pytest']   # ignore missing imports from the plotly package.
+module = ['plotly.*', 'numpy', 'pytest', "scipy.*"]   # ignore missing imports from the plotly package.
 ignore_missing_imports = true
 
 [tool.ruff]

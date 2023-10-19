@@ -5,7 +5,8 @@ from typing import Callable
 
 import numpy as np
 
-from .base import _BaseSim, _BaseSimIterate, forward_euler, runge_kutta
+from .base import _BaseSim, _BaseSimIterate
+from .solvers import forward_euler, runge_kutta_4
 
 
 class KuramotoSivashinsky(_BaseSimIterate):
@@ -194,7 +195,7 @@ class MackeyGlass(_BaseSim):
 
         if isinstance(self.solver, str):
             if self.solver == "rk4":
-                x_next = runge_kutta(flow_like, self.dt, x)
+                x_next = runge_kutta_4(flow_like, self.dt, x)
             elif self.solver == "forward_euler":
                 x_next = forward_euler(flow_like, self.dt, x)
             else:

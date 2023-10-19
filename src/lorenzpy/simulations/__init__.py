@@ -46,8 +46,8 @@ TODO <below>
       is not implemented yet. See:
       https://github.com/mkdocstrings/mkdocstrings/issues/78
 """
-
-from .autonomous_flows import Lorenz63, Lorenz96, Roessler
+from . import solvers
+from .autonomous_flows import DoublePendulum, Lorenz63, Lorenz96, Roessler
 from .discrete_maps import Logistic
 from .driven_systems import SimplestDrivenChaotic
 from .others import KuramotoSivashinsky, MackeyGlass
@@ -55,6 +55,7 @@ from .others import KuramotoSivashinsky, MackeyGlass
 __all__ = [
     "Lorenz63",
     "Roessler",
+    "DoublePendulum",
     "Lorenz96",
     "Logistic",
     "SimplestDrivenChaotic",

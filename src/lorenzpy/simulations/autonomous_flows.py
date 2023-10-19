@@ -6,6 +6,7 @@ from typing import Callable
 import numpy as np
 
 from .base import _BaseSimFlow
+from .solvers import create_scipy_ivp_solver
 
 
 class Lorenz63(_BaseSimFlow):
@@ -86,6 +87,56 @@ class Roessler(_BaseSimFlow):
     def get_default_starting_pnt(self) -> np.ndarray:
         """Return default starting point of Roessler system."""
         return np.array([-9.0, 0.0, 0.0])
+
+
+class DoublePendulum(_BaseSimFlow):
+    """Simulation class for the dimensionless double pendulum with m1 = m2 and l1=l2.
+
+    The state space is given by [angle1, angle2, angular_vel, angular_vel2].
+    """
+
+    def __init__(
+        self,
+        dt: float = 0.1,
+        solver: str
+        | str
+        | Callable[[Callable, float, np.ndarray], np.ndarray] = create_scipy_ivp_solver(
+            "DOP853"
+        ),
+    ):
+        """Initialize the Doueble Pendulum simulation object.
+
+        Args:
+            dt: Time step to simulate.
+            solver: The solver. Default is DOP853 scipy solver here.
+        """
+        super().__init__(dt, solver)
+
+    def flow(self, x: np.ndarray) -> np.ndarray:
+        """Return the flow of double pendulum."""
+        angle1, angle2, angle1_dot, angle2_dot = x[0], x[1], x[2], x[3]
+
+        delta_angle = angle1 - angle2
+
+        angle1_dotdot = (
+            9 * np.cos(delta_angle) * np.sin(delta_angle) * angle1_dot**2
+            + 6 * np.sin(delta_angle) * angle2_dot**2
+            + 18 * np.sin(angle1)
+            - 9 * np.cos(delta_angle) * np.sin(angle2)
+        ) / (9 * np.cos(delta_angle) ** 2 - 16)
+
+        angle2_dotdot = (
+            24 * np.sin(delta_angle) * angle1_dot**2
+            + 9 * np.cos(delta_angle) * np.sin(delta_angle) * angle2_dot**2
+            + 27 * np.cos(delta_angle) * np.sin(angle1)
+            - 24 * np.sin(angle2)
+        ) / (16 - 9 * np.cos(delta_angle) ** 2)
+
+        return np.array([angle1_dot, angle2_dot, angle1_dotdot, angle2_dotdot])
+
+    def get_default_starting_pnt(self) -> np.ndarray:
+        """Return default starting point of Double Pendulum."""
+        return np.array([0.6, 2.04, 0, 0])
 
 
 class Lorenz96(_BaseSimFlow):

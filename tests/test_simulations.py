@@ -3,6 +3,7 @@ import numpy as np
 import pytest
 
 from lorenzpy import simulations  # type: ignore
+from lorenzpy.simulations import solvers
 from lorenzpy.simulations.base import _BaseSimFlow, _BaseSimIterate  # type: ignore
 
 
@@ -167,3 +168,26 @@ def test_simplest_driven_chaotic_custom_starting_point_no_time():
     )
 
     assert data_w_time.shape == (2, 2)
+
+
+@pytest.mark.parametrize(
+    "solver_method",
+    [
+        "RK45",
+        "RK23",
+        "DOP853",
+        "Radau",
+        "BDF",
+        "LSODA",
+    ],
+)
+def test_scipy_solvers_lorenz63(solver_method):
+    """Test all different scipy solvers."""
+    dt = 0.01
+    solver = solvers.create_scipy_ivp_solver(method=solver_method)
+    starting_point = np.array([0.0, -0.01, 9.0])
+    data = simulations.Lorenz63(dt=dt, solver=solver).simulate(5, starting_point)
+
+    data_rk4 = simulations.Lorenz63(dt=dt, solver="rk4").simulate(5, starting_point)
+
+    np.testing.assert_almost_equal(data[-1, 0], data_rk4[-1, 0], decimal=5)
