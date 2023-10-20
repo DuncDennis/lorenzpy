@@ -41,7 +41,6 @@ dev = [
     "pre-commit==3.1.1",  # add version?
 ]
 plot = [
-    "plotly>=5.11",
     "matplotlib>=3.5"
 ]
 
@@ -59,7 +58,7 @@ line-length = 88
 files = "src/lorenzpy/"
 
 [[tool.mypy.overrides]]
-module = ['plotly.*', 'numpy', 'pytest', "scipy.*", "matplotlib.*", "PIL"]   # ignore missing imports from the plotly package.
+module = ['numpy', 'pytest', "scipy.*", "matplotlib.*", "PIL", "mpl_toolkits.*"]
 ignore_missing_imports = true
 
 [tool.ruff]

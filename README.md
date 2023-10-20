@@ -22,8 +22,7 @@ $ pip install lorenzpy
 ```
 
 To install with the additional plotting functionality.
-This also installs `plotly` and `matplotlib`. ⚠️ Plotting functionality not in a useful
-state.
+This also installs `matplotlib`. ⚠️ Plotting functionality not in a useful state.
 ```bash
 $ pip install lorenzpy[plot]
 ```

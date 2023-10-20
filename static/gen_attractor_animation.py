@@ -18,13 +18,6 @@ systems = [
     "Rucklidge",
     "Thomas",
     "WindmiAttractor",
-    # "DoublePendulum",
-    # "Lorenz96",
-    # "Logistic",
-    # "Henon",
-    # "SimplestDrivenChaotic",
-    # "KuramotoSivashinsky",
-    # "MackeyGlass",
 ]
 
 # create data:
@@ -38,9 +31,7 @@ for i_sys, system in enumerate(systems):
 # Plot:
 plt.style.use("dark_background")
 fig, axs = plt.subplots(2, 5, figsize=(10, 3), subplot_kw=dict(projection="3d"))
-# plt.subplots_adjust(wspace=5)
 plt.subplots_adjust(hspace=0.5)
-# fig.tight_layout()
 axs = axs.flatten()
 for i_ax, ax in enumerate(axs):
     system = systems[i_ax]
