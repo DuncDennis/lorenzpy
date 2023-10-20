@@ -4,13 +4,14 @@ repos:
     hooks:
     -   id: trailing-whitespace
     -   id: check-added-large-files
+        args: ['--maxkb=1500']
 -   repo: https://github.com/psf/black
     rev: "23.1.0"
     hooks:
     -   id: black
         language_version: python3
 -   repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: 'v0.0.245'
+    rev: 'v0.1.0'
     hooks:
     -   id: ruff
 -   repo: https://github.com/pre-commit/mirrors-mypy
