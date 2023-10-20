@@ -1,10 +1,18 @@
 # LorenzPy
 
+A Python package to simulate and measure chaotic dynamical systems.
+
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v1.json)](https://github.com/charliermarsh/ruff)
 [![codecov](https://codecov.io/gh/DuncDennis/lorenzpy/branch/main/graph/badge.svg?token=ATWAEQHBYB)](https://codecov.io/gh/DuncDennis/lorenzpy)
 [![license: MIT](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
 [![Python versions](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+
+------
+
+![Flow-Attractors](static/attractor_animation.gif)
+
+------
 
 ## ⚙️ Installation
 
@@ -18,6 +26,7 @@ This also installs `plotly`.
 ```bash
 $ pip install lorenzpy[plot]
 ```
+
 
 ## ▶️ Usage
 

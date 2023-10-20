@@ -21,7 +21,7 @@ class Lorenz63(_BaseSimFlow):
         sigma: float = 10.0,
         rho: float = 28.0,
         beta: float = 8 / 3,
-        dt: float = 0.05,
+        dt: float = 0.03,
         solver: str | str | Callable[[Callable, float, np.ndarray], np.ndarray] = "rk4",
     ):
         """Initialize the Lorenz63 simulation object.
