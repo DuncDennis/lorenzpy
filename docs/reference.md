@@ -3,6 +3,7 @@
 
 ### simulations module:
 ::: lorenzpy.simulations
+::: lorenzpy.simulations.solvers
 
 ### measures module:
 ::: lorenzpy.measures

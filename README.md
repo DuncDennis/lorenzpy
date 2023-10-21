@@ -22,8 +22,7 @@ $ pip install lorenzpy
 ```
 
 To install with the additional plotting functionality.
-This also installs `plotly` and `matplotlib`. ⚠️ Plotting functionality not in a useful
-state.
+This also installs `matplotlib`. ⚠️ Plotting functionality not in a useful state.
 ```bash
 $ pip install lorenzpy[plot]
 ```
@@ -58,6 +57,8 @@ lle = lpy.measures.largest_lyapunov_exponent(
 
 The calculated largest Lyapunov exponent of *0.9051...* is very close to the literature
 value of *0.9056*[^SprottChaos].
+
+For more examples see the [examples folder](examples/README.md).
 
 ## 💫 Supported systems
 

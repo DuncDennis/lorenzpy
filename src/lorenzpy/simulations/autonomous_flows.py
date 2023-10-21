@@ -95,7 +95,7 @@ class ComplexButterfly(_BaseSimFlow):
     def __init__(
         self,
         a: float = 0.55,
-        dt: float = 0.05,
+        dt: float = 0.1,
         solver: str | str | Callable[[Callable, float, np.ndarray], np.ndarray] = "rk4",
     ):
         """Initialize the ComplexButterfly simulation object.

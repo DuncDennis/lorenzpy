@@ -137,6 +137,13 @@ def test_unsupported_solver():
         sim_obj.simulate(2)
 
 
+def test_unsupported_solver_mackey_glass():
+    """Test the error raising of an unsupported solver."""
+    sim_obj = simulations.MackeyGlass(solver="WRONG_SOLVER")
+    with pytest.raises(ValueError):
+        sim_obj.simulate(2)
+
+
 def test_custom_solver_as_forward_euler():
     """Test a custom solver, which behaves like forward_euler."""
 
@@ -147,6 +154,20 @@ def test_custom_solver_as_forward_euler():
     data_custom = DemoFlowSim(solver=custom_solver).simulate(2)
 
     data_forward_euler = DemoFlowSim(solver="forward_euler").simulate(2)
+
+    assert (data_custom == data_forward_euler).all()
+
+
+def test_custom_solver_as_forward_euler_mackey_glass():
+    """Test a custom solver, which behaves like forward_euler for mackey glass."""
+
+    def custom_solver(flow, dt, x):
+        # is forward euler
+        return dt * flow(x) + x
+
+    data_custom = simulations.MackeyGlass(solver=custom_solver).simulate(2)
+
+    data_forward_euler = simulations.MackeyGlass(solver="forward_euler").simulate(2)
 
     assert (data_custom == data_forward_euler).all()
 
@@ -191,3 +212,32 @@ def test_scipy_solvers_lorenz63(solver_method):
     data_rk4 = simulations.Lorenz63(dt=dt, solver="rk4").simulate(5, starting_point)
 
     np.testing.assert_almost_equal(data[-1, 0], data_rk4[-1, 0], decimal=5)
+
+
+def test_long_starting_pnt_mackey_glass():
+    """Test the option for long starting_point in mackey_glass."""
+    dt = 0.1
+    tau = 0.35
+    history_steps = int(tau / dt)  # 3
+    starting_point = np.ones(history_steps + 1)
+
+    data_short_starting_point = simulations.MackeyGlass(dt=dt, tau=tau).simulate(
+        10, starting_point=np.array([1])
+    )
+
+    data_long_starting_point = simulations.MackeyGlass(dt=dt, tau=tau).simulate(
+        10, starting_point=starting_point
+    )
+
+    np.testing.assert_almost_equal(data_short_starting_point, data_long_starting_point)
+
+
+def test_wrong_starting_point_size_mackey_glass():
+    """Test ValueError in mackey_glass if long starting pnt is used but wrong shape."""
+    dt = 0.1
+    tau = 0.35
+    starting_point = np.ones(5)  # should have length 4
+    with pytest.raises(ValueError):
+        _ = simulations.MackeyGlass(dt=dt, tau=tau).simulate(
+            10, starting_point=starting_point
+        )

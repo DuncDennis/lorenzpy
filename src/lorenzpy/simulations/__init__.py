@@ -28,24 +28,8 @@ Examples:
     >>> data = sims.Lorenz63().simulate(1000)
     >>> data.shape
     (1000, 3)
-
-
-TODO <below>
-    - Probably for each concrete simulation class + public methods. Compare with sklearn
-    - Find out which functionality is missing. E.g. Raising error when wrong values are
-      parsed.
-    - Check where to add proper tests and how to add them efficiently. Fixtures?
-      Parametrization?
-    - Implement all the other dynamical systems.
-    - Check if the names of files and functions make sense?
-    - Add functionality to add your own dynamical system? As my base-classes are
-      protected this is maybe not so easy? -> Make ABC public?
-    - Think about adding NARMA? Maybe I need a random number generator framework.
-    - Check if I can further reduce code duplication. Maybe regarding solvers.
-    - Check for proper doc-generation. It seems that the methods of inhereted members
-      is not implemented yet. See:
-      https://github.com/mkdocstrings/mkdocstrings/issues/78
 """
+
 from . import solvers
 from .autonomous_flows import (
     Chen,
