@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+### v0.0.2 (21.10.2023)
+- Added more Systems.
+- Added new Lyapunov spectrum measure.
+- Added new simulation backend.
+- Added example folder.
+- Added static folder to generate animation in readme.
+- Changed plotly dependency to matplotlib.
+- More smaller improvements...
+
 ### v0.0.1 (16.03.2023)
 - First release of `lorenzpy`
 
