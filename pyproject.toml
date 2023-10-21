@@ -1,7 +1,7 @@
 [project]
 name = "lorenzpy"
 readme = "README.md"
-version = "0.0.1"
+version = "0.0.2"
 description = "A Python package to simulate and measure chaotic dynamical systems."
 authors = [
   {name = "Dennis Duncan", email = "DuncDennis@gmail.com"},
