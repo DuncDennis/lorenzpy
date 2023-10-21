@@ -228,13 +228,12 @@ class MackeyGlass(_BaseSim):
         if starting_point.size == self.history_steps + 1:
             initial_history = starting_point
         elif starting_point.size == 1:
-            initial_history = np.repeat(starting_point, self.history_steps)
+            initial_history = np.repeat(starting_point, self.history_steps + 1)
         else:
             raise ValueError("Wrong size of starting point.")
 
         traj_w_hist = np.zeros((self.history_steps + time_steps, 1))
-        traj_w_hist[: self.history_steps, :] = initial_history[:, np.newaxis]
-        traj_w_hist[self.history_steps, :] = starting_point
+        traj_w_hist[: self.history_steps + 1, :] = initial_history[:, np.newaxis]
 
         for t in range(1, time_steps + transient):
             t_shifted = t + self.history_steps
