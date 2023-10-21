@@ -21,7 +21,7 @@ systems = [
 ]
 
 # create data:
-N = 1000
+N = 1500
 data_dict = {}
 for i_sys, system in enumerate(systems):
     sys_class = sim_class = getattr(sims, system)
@@ -37,7 +37,7 @@ for i_ax, ax in enumerate(axs):
     system = systems[i_ax]
     data = data_dict[system]
     ax.title.set_text(system)
-    ax.plot(data[:, 0], data[:, 1], data[:, 2], linewidth=0.2, color="white")
+    ax.plot(data[:, 0], data[:, 1], data[:, 2], linewidth=0.12, color="white")
     ax.set_xticks([])  # Remove x-axis ticks
     ax.set_yticks([])  # Remove y-axis ticks
     ax.set_zticks([])  # Remove y-axis ticks
@@ -50,9 +50,9 @@ for i_ax, ax in enumerate(axs):
     ax.axis("off")
 
 
-def update_graph(num):
+def update_graph(angle):
     """Rotate camera angle."""
-    azim = num
+    azim = angle
     roll = 0
     elev = 0
     for i_ax, ax in enumerate(axs):
@@ -67,9 +67,12 @@ previous_files = [f"{frames_dir}/" + x for x in os.listdir(frames_dir)]
 for prev_file in previous_files:
     os.remove(prev_file)
 
-for num in range(0, 360):
-    update_graph(num)
-    plt.savefig(f"{frames_dir}/frame_{str(num).zfill(3)}.png", transparent=True, dpi=50)
+for num in range(0, 90):
+    angle = 4 * num
+    update_graph(angle)
+    plt.savefig(
+        f"{frames_dir}/frame_{str(num).zfill(3)}.png", transparent=True, dpi=100
+    )
 
 # gif:
 image_filenames = [
@@ -86,7 +89,7 @@ images[0].save(
     format="GIF",
     save_all=True,
     append_images=images[1:],
-    duration=20,
+    duration=40,
     loop=0,
     transparency=0,
     disposal=2,
